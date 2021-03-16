@@ -2,15 +2,15 @@ import React from "react";
 
 import Waves from "assets/sidemenu-waves.svg";
 
-const SideMenu = () => {
+const Sidemenu = () => {
 	return (
-		<div className="SideMenu-Root">
+		<div className="Sidemenu-Root">
 			Sidemenu
-			<div className="SideMenu-Waves">
+			<div className="Sidemenu-Waves">
 				<img src={Waves}/>
 			</div>
 		</div>
 	)
 };
 
-export default SideMenu;
+export default Sidemenu;

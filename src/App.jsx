@@ -9,7 +9,7 @@ import Login from "components/login.page";
 import Profile from "components/profile.page";
 import Registration from "components/registration.page";
 
-import SideMenu from "components/SideMenu";
+import Sidemenu from "components/Sidemenu";
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
 	return (
 		<div className="app">
 			<BrowserRouter>
-				<SideMenu/>
+				<Sidemenu/>
 				<main className="content">
 				<Switch>
 					<Route path="/login" component={Login}>
