@@ -14,7 +14,6 @@
 	height: 100%;
 	border-radius: inherit;
 	overflow: hidden;
-
 	img {
 		position: absolute;
 		left: -39px;
@@ -22,4 +21,71 @@
 		transform: rotate(-3deg);
 		opacity: 0.1;
 	}
+}
+
+.Sidemenu-Header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 41px;
+	padding-bottom: 54px;
+	span {
+		font-family: $primary-font;
+		font-size: 28px;
+		line-height: 22px;
+		font-weight: bold;
+		color: #FFFFFF;
+	}
+}
+
+.Sidemenu-List, .Sidemenu-NestedList {
+	& > .MuiListItem-root {
+		height: 56px;
+		padding-left: 24px;
+		&:hover {
+			background: transparent;
+		}
+		.MuiListItemIcon-root {
+			min-width: 0;
+			width: 24px;
+			margin-right: 16px;
+		}
+		.MuiListItemText-primary {
+			font-family: $primary-font;
+			font-size: 14px;
+			line-height: 24px;
+			font-weight: bold;
+			color: #D3D3FD;
+		}
+		svg {
+			fill: #D3D3FD;
+		}
+	}
+	& > .MuiListSubheader-root {
+		font-family: $primary-font;
+		font-weight: bold;
+		font-size: 12px;
+		line-height: 20px;
+		text-transform: uppercase;
+		color: #D3D3FD;
+	}
+}
+
+.Sidemenu-NestedList {
+	& > .MuiListItem-root {
+		padding-left: 48px;
+	}
+	& > .MuiListSubheader-root {
+		padding-left: 24px;
+	}
+}
+
+.Sidemenu-Active::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	width: 3px;
+	height: 100%;
+	background: #D3D3FD;
+	border-radius: 0px 100px 100px 0px;
 }

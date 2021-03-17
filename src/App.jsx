@@ -9,7 +9,7 @@ import Login from "components/login.page";
 import Profile from "components/profile.page";
 import Registration from "components/registration.page";
 
-import Sidemenu from "components/Sidemenu";
+import Sidemenu from "components/Sidemenu/index";
 
 
 function App() {
@@ -33,11 +33,19 @@ function App() {
 								<Redirect to="/" /> : null
 						}
 					</Route>
+					<Route path="/profile">
+						<p>Profile</p>
+					</Route>
+					<Route path="/chat">
+						<p>Chat</p>
+					</Route>
+					<Route path="/friends">
+						<p>Friends</p>
+					</Route>
 					<Route path="/">
 						{
 							logged ?
 								<Profile /> : <Redirect to="/login" />
-
 						}
 					</Route>
 
