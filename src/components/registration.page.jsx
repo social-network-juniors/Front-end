@@ -3,18 +3,20 @@ import { Link } from 'react-router-dom'
 import { UserActions } from "../redux/reducers/user.reducer";
 import { useDispatch } from "react-redux";
 import { registration } from '../api/rest/registration'
+import { TextField, Button } from '@material-ui/core';
+
 function Registration(props) {
 
-    // //redux
-    // const dispatch = useDispatch();
-    // const handleClick = () => {
-    //     dispatch(
-    //         UserActions.replaceProfile({ username: "MichaleShumsky" })
-    //     );
-    //     dispatch(
-    //         UserActions.changeLogged(true)
-    //     );
-    // };
+    //redux
+    const dispatch = useDispatch();
+    const logIn = () => {
+        dispatch(
+            UserActions.replaceProfile({ username: "MichaleShumsky" })
+        );
+        dispatch(
+            UserActions.changeLogged(true)
+        );
+    };
 
     //vars and states
     const [userData, setUserData] = useState({
@@ -81,9 +83,9 @@ function Registration(props) {
             setIsPasswordConfirmed(true);
             setUserData((userData) => ({ ...userData, passwordConfirmation: passwordConfirmation }));
         } else if (passwordConfirmation !== '') {
-            setTimeout(() => {
-                setIsPasswordConfirmed(false)
-            }, 1500);
+            // setTimeout(() => {
+            setIsPasswordConfirmed(false)
+            // }, 1500);
         }
 
     }, [passwordValue, passwordConfirmation])
@@ -91,9 +93,9 @@ function Registration(props) {
     const isValueCorrect = (dataType, value, regExp, inputState) => {
         const isCorrect = regExp.test(value);
         if (!isCorrect && value !== '') {
-            setTimeout(() => {
-                inputState(false)
-            }, 1500);
+            // setTimeout(() => {
+            inputState(false)
+            // }, 1500);
 
         } else {
             inputState(true)
@@ -112,23 +114,25 @@ function Registration(props) {
             let day = dateArr[0];
 
             setIsBDate(true);
-            setTimeout(() => {
-                if (year >= 2006 || year <= 1900) { setIsBDate(false); }
-                if (month > 12 || month <= 0) { setIsBDate(false); }
-                if (day > 31 || day <= 0) { setIsBDate(false); }
-                if (littleMonths.includes(month) && day === 31) { setIsBDate(false); }
-                if (month == 2 && day >= 30) { setIsBDate(false); }
-                if (year % 4 !== 0 && month == 2 && day == 29) { setIsBDate(false); }
-            }, 1500);
+            // setTimeout(() => {
+            if (year >= 2006 || year <= 1900) { setIsBDate(false); }
+            if (month > 12 || month <= 0) { setIsBDate(false); }
+            if (day > 31 || day <= 0) { setIsBDate(false); }
+            if (littleMonths.includes(month) && day === 31) { setIsBDate(false); }
+            if (month == 2 && day >= 30) { setIsBDate(false); }
+            if (year % 4 !== 0 && month == 2 && day == 29) { setIsBDate(false); }
+            // }, 1500);
             setUserData((userData) => ({ ...userData, bday: day, bmonth: month, byear: year }));
         }
     }
     const registerRequest = () => {
+
         let isDataEntered = userData.login && userData.password && userData.passwordConfirmation && userData.name && userData.lastName && userData.byear;
+        console.log(userData);
         if (isDataEntered) {
-            registration(userData.login, userData.password, userData.passwordConfirmation, userData.name, userData.lastName, userData.bday, userData.bmonth, userData.byear);
+            registration(userData.login, userData.password, userData.passwordConfirmation, userData.name, userData.lastName, Number(userData.bday), Number(userData.bmonth), Number(userData.byear));
         } else {
-            console.log(userData);
+            console.log(userData.bday);
         };
     }
 
@@ -137,30 +141,34 @@ function Registration(props) {
 
     //render
     return (
-        <div>
-            <p>Регистрация</p>
-            <input type="email" value={loginValue} onChange={(e) => setLoginValue(e.target.value)} type='text' placeholder='email or number' />
-            {isLoginWrong && <div>Please, enter a correct email or number</div>}
-            <input value={passwordValue} onChange={(e) => setPasswordValue(e.target.value)} type='password' placeholder='password' />
-            { !isPasswordSafe && <div>Password should include 8 signs min </div>}
-            <input onChange={(e) => setPasswordConfirmation(e.target.value)} type='password' placeholder='Confirm password' />
-            { !isPasswordConfirmed && <div>Passwords are different</div>}
+        <div className='Registration__container'>
+            <h1 className='Registration__title'>Registration</h1>
+            <div className='Registration__wrapper'>
+
+                <TextField id="standard-basic" variant="outlined" label="email or number" type="email" value={loginValue} onChange={(e) => setLoginValue(e.target.value)} type='text' />
+                {isLoginWrong && <div>Please, enter a correct email or number</div>}
+                <TextField id="standard-basic" variant="outlined" label="password" value={passwordValue} onChange={(e) => setPasswordValue(e.target.value)} type='password' />
+                {!isPasswordSafe && <div>Password should include 8 signs min </div>}
+                <TextField id="standard-basic" variant="outlined" label="Confirm password" onChange={(e) => setPasswordConfirmation(e.target.value)} type='password' />
+                {!isPasswordConfirmed && <div>Passwords are different</div>}
+
+            </div>
 
             { isLogAndPasswordEntered &&
-                <div>
-                    <input placeholder='имя' onChange={(e) => isValueCorrect('name', e.target.value, nameRegExp, setIsName)} />
+                <div className='Registration__wrapper'>
+                    <TextField className='Registration__input' id="standard-basic" variant="outlined" label='first name' onChange={(e) => isValueCorrect('name', e.target.value, nameRegExp, setIsName)} />
                     {!isName && <div>Enter a correct name</div>}
-                    <input placeholder='фамилия' onChange={(e) => isValueCorrect('lastName', e.target.value, nameRegExp, setIsLastName)} />
+                    <TextField className='Registration__input' id="standard-basic" variant="outlined" label='last name' onChange={(e) => isValueCorrect('lastName', e.target.value, nameRegExp, setIsLastName)} />
                     {!isLastName && <div>Enter a correct surname</div>}
                     {/* <input placeholder='dd.mm.yyyy' onChange={(e) => isValueCorrect('age', e.target.value, ageRegExp, setIsAge)} /> */}
-                    <input placeholder='dd.mm.yyyy' onChange={(e) => bDateHandler(e.target.value)} />
+                    <TextField className='Registration__input' id="standard-basic" variant="outlined" label='dd.mm.yyyy' onChange={(e) => bDateHandler(e.target.value)} />
                     {!isBDate && <div>Enter a correct age</div>}
 
                 </div>
             }
 
-            <div onClick={registerRequest}>Зарегистрироваться</div>
-            <div><Link to='/login'>Уже есть аккаунт?</Link></div>
+            <Button className='Registration__button' variant="contained" color="primary" onClick={registerRequest}>Зарегистрироваться</Button>
+            <Button color="primary"><Link to='/login'>Уже есть аккаунт?</Link></Button>
 
         </div>
     );

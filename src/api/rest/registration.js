@@ -1,7 +1,7 @@
 import apiCall from '../apiCall'
 
 export const registration = ({
-    email,
+    login,
     password,
     password_confirmation,
     first_name,
@@ -11,21 +11,19 @@ export const registration = ({
     byear,
 }) => {
     return apiCall({
-        url: '/api/auth/register',
+        url: 'https://electroquest.ru/api/auth/register',
         method: 'post',
         data: {
-            email,
-            password,
-            password_confirmation,
-            first_name,
-            last_name,
-            bday,
-            bmonth,
-            byear,
+            "login": "testruser@mail.com",
+            "password": "123456",
+            "password_confirmation": "123456",
+            "first_name": "Сергей",
+            "last_name": "Сергеев",
+            "bday": 1,
+            "bmonth": 1,
+            "byear": 2020
         }
     }).catch((error) => {
-        if (error.message === 'Sorry, wrong email address or password. Please, try again') {
-            alert('mistake');
-        } else { alert('super') }
+        console.log(error.message)
     })
 }
