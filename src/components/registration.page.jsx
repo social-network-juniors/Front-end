@@ -5,8 +5,6 @@ import { useDispatch } from "react-redux";
 import { registration } from '../api/rest/registration';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
-
-
 function Registration(props) {
     // //redux
     // const dispatch = useDispatch();
@@ -20,12 +18,7 @@ function Registration(props) {
     // };
 
 
-    // if (year >= 2006 || year <= 1900) { setIsBDate(false); }
-    // if (month > 12 || month <= 0) { setIsBDate(false); }
-    // if (day > 31 || day <= 0) { setIsBDate(false); }
-    // if (littleMonths.includes(month) && day === 31) { setIsBDate(false); }
-    // if (month == 2 && day >= 30) { setIsBDate(false); }
-    // if (year % 4 !== 0 && month == 2 && day == 29) { setIsBDate(false); }
+
 
     //vars and states
     const [inputData, setInputData] = useState({
@@ -66,6 +59,7 @@ function Registration(props) {
 
     // password validation
     useEffect(() => {
+
         if (inputData.password == '') {
             setIsCorrect({ ...isCorrect, password: true })
         } else {
@@ -139,12 +133,15 @@ function Registration(props) {
     }, [inputData.bdate])
 
     const registerRequest = () => {
-        // let isDataEntered = userData.login && userData.password && userData.passwordConfirmation && userData.name && userData.lastName && userData.byear;
-        if (true) {
-            registration(inputData.login, inputData.password, inputData.passwordConfirmation, inputData.name, inputData.lastName, 1, 1, 1999);
-        } else {
-            console.log(inputData);
-        };
+        const bday = Number(dateInput.split('/')[0]);
+        const bmonth = Number(dateInput.split('/')[1]);
+        const byear = Number(dateInput.split('/')[2]);
+        registration(inputData.login, inputData.password, inputData.passwordConfirmation, inputData.name, inputData.lastName, bday, bmonth, byear)
+        // registration('ma2@icloud.com', '111111111', '111111111', 'Bake', 'Mo', 1, 1, 1999);
+        console.log(inputData)
+
+
+
     }
 
     //render

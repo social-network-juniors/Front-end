@@ -1,6 +1,5 @@
 import apiCall from '../apiCall'
-
-export const registration = ({
+export const registration = (
     email,
     password,
     password_confirmation,
@@ -8,24 +7,26 @@ export const registration = ({
     last_name,
     bday,
     bmonth,
-    byear,
-}) => {
+    byear
+
+) => {
     return apiCall({
         url: 'https://electroquest.ru/api/auth/register',
         method: 'post',
         data: {
-            email,
-            password,
-            password_confirmation,
-            first_name,
-            last_name,
-            bday,
-            bmonth,
-            byear,
+            "login": email,
+            "password": password,
+            "password_confirmation": password_confirmation,
+            "first_name": first_name,
+            "last_name": last_name,
+            "bday": bday,
+            "bmonth": bmonth,
+            "byear": byear
         }
     }).catch((error) => {
-        if (error.message) {
-            console.log(error.message);
-        } else { alert('super') }
-    })
+        // if (error.message) {
+        //     console.log(error.message);
+        // } else { alert('super') }
+        console.log(error.response.data);
+    });
 }
