@@ -1,8 +1,3 @@
-import apiCall from '../apiCall'
+import makeRequest from "../index";
 
-export const login = () => {
-    return apiCall({
-        url: '/api/auth/register',
-        method: 'post',
-    }).catch((error) => { console.log(error) })
-}
+export const login = (login, password) => makeRequest("auth/register", "POST", {login, password}, null, null);

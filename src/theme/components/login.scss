@@ -1,0 +1,57 @@
+.Login-Root {
+	@include flexCenter();
+	flex-direction: column;
+	height: 100%;
+	& > h1 {
+		color: $text-color-dark;
+		margin-bottom: 12px;
+	}
+}
+
+.Login-Form {
+	padding: 20px;
+	background: #F6F8FF;
+	border-radius: 20px;
+	&__Field {
+		display: flex;
+		flex-direction: column;
+		font-family: $primary-font;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 17px;
+		line-height: 14px;
+		color: $text-color-dark;
+		&:first-child {
+			margin-bottom: 16px;
+		}
+		.MuiFormControl-root {
+			margin-top: 10px;
+		}
+	}
+	&__Submit {
+		margin-top: 16px;
+		text-align: center;
+		.MuiButton-contained {
+			display: flex;
+			width: 100%;
+			height: 50px;
+			background: #3D41D7;
+			&:hover {
+				background: #3D41D7;
+			}
+			.MuiButton-label {
+				color: #FFFFFF;
+			}
+			
+		}
+		.MuiButton-contained:not(.Mui-disabled) {
+			box-shadow: 0px 14px 34px rgba(34, 37, 169, 0.4) !important;
+		}
+		.MuiButton-text {
+			margin-top: 12px;
+			.MuiButton-label {
+
+			}
+		}
+	}
+}

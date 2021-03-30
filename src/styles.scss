@@ -1,7 +1,10 @@
 @import "theme/variables.scss";
+@import "theme/mixins.scss";
 @import "theme/normalize.css";
-@import "theme/sidemenu.scss";
-@import "theme/registration.scss";
+
+@import "theme/components/sidemenu.scss";
+@import "theme/components/registration.scss";
+@import "theme/components/login.scss";
 
 body, html {
 	height: 100%;
@@ -20,4 +23,5 @@ body, html {
 
 main.content {
 	margin-left: 54px;
+	width: 100%;
 }

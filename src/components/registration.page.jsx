@@ -128,6 +128,7 @@ function Registration(props) {
             setInputData({ ...inputData, bdate: newArr })
         }
     }
+
     //checker for registration request
     useEffect(() => {
         setIsdataEntered(true)
@@ -149,11 +150,7 @@ function Registration(props) {
             registration(inputData.login, inputData.password, inputData.passwordConfirmation, inputData.name, inputData.lastName, bday, bmonth, byear)
             logIn();
         }
-
-
-
     }
-
 
     //render
     return (
