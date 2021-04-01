@@ -7,12 +7,12 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 function Registration(props) {
     //redux
-    const dispatch = useDispatch();
-    const logIn = () => {
-        dispatch(
-            UserActions.changeLogged(true)
-        );
-    };
+    // const dispatch = useDispatch();
+    // const logIn = () => {
+    //     dispatch(
+    //         UserActions.changeLogged(true)
+    //     );
+    // };
 
 
 
@@ -64,7 +64,6 @@ function Registration(props) {
         } else {
             setIsCorrect({ ...isCorrect, password: false })
         }
-        console.log(inputData.password);
     }, [inputData.password])
 
     // password confirmation validation
@@ -133,23 +132,29 @@ function Registration(props) {
     useEffect(() => {
         setIsdataEntered(true)
         for (const input in inputData) {
-            if (input == '' || []) setIsdataEntered(false);
+            if (inputData[input].length === 0) setIsdataEntered(false);
         }
         for (const input in isCorrect) {
-            if (input == false) return setIsdataEntered(false);
+            if (isCorrect[input] == false) setIsdataEntered(false);
+
         }
-        console.log(isdataEntered);
-        console.log(isCorrect);
+
     }, [inputData, isCorrect]);
 
     const registerRequest = () => {
         const bday = Number(dateInput.split('/')[0]);
         const bmonth = Number(dateInput.split('/')[1]);
         const byear = Number(dateInput.split('/')[2]);
+        console.log(isdataEntered)
         if (isdataEntered) {
             registration(inputData.login, inputData.password, inputData.passwordConfirmation, inputData.name, inputData.lastName, bday, bmonth, byear)
-            logIn();
-        }
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
+        } else { console.log('enter all the data') }
     }
 
     //render

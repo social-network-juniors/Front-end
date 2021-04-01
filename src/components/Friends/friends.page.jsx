@@ -73,7 +73,7 @@ export default function Friends() {
                     ),
                 }}
             />
-            <Tabs value={tab} onChange={handleTabsMenu}>
+            {/* <Tabs value={tab} onChange={handleTabsMenu}>
                 <Tab icon={<PeopleIcon />} label="Друзья" />
                 <Tab icon={<PersonAddIcon />} label="Заявки" />
             </Tabs>
@@ -88,7 +88,7 @@ export default function Friends() {
                     <MenuItem onClick={() => closeFilterMenu('alphabet')}>По алфавиту</MenuItem>
                     <MenuItem onClick={() => closeFilterMenu('default')}>По умолчанию</MenuItem>
                 </Menu>
-            </div>}
+            </div>} */}
             { tab === 0 ? <FriendItem friends={friends} /> : <Invitations invites={inviteData} />}
 
         </div >

@@ -8,7 +8,7 @@ import { useLogged } from "./services/UserService";
 import Login from "./components/login.page";
 import Profile from "./components/profile.page";
 import Registration from "./components/registration.page";
-import Friends from "./components/Friends/Friends";
+import Friends from "./components/Friends/friends.page";
 
 import Sidemenu from "./components/Sidemenu/index";
 
@@ -41,7 +41,10 @@ function App() {
 							<p>Chat</p>
 						</Route>
 						<Route path="/friends">
-							<Friends />
+							{
+								logged ?
+									<Friends /> : <Redirect to="/login" />
+							}
 						</Route>
 						<Route path="/">
 							{
