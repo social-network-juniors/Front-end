@@ -5,14 +5,14 @@ import { useDispatch } from "react-redux";
 import { registration } from '../api/rest/registration';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
+import { setCookie } from "../utils";
+
 function Registration(props) {
     //redux
-    // const dispatch = useDispatch();
-    // const logIn = () => {
-    //     dispatch(
-    //         UserActions.changeLogged(true)
-    //     );
-    // };
+    const dispatch = useDispatch();
+    const logIn = () => {
+        dispatch(UserActions.changeLogged(true));
+    };
 
 
 
@@ -148,7 +148,21 @@ function Registration(props) {
         if (isdataEntered) {
             registration(inputData.login, inputData.password, inputData.passwordConfirmation, inputData.name, inputData.lastName, bday, bmonth, byear)
                 .then((response) => {
-                    console.log(response)
+
+                    let token = response.data.token;
+                    setCookie('AuthToken', token);
+                    logIn()
+                    // response.data.token
+                    // if success =>
+                    // let token 
+
+                    // set cookie = AuthToken, token
+
+                    // is logged true
+
+                    // =redirect to Profile
+
+                    // profile didM -> dispatch setProfData (cookie)
 
                 })
                 .catch((error) => {

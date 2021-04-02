@@ -1,9 +1,10 @@
-import {login} from "../../api";
+import { login } from "../../api";
 
 /* Types */
 
 export const UserActionTypes = {
 	LOGIN: "USER_LOGIN",
+	CHANGE_LOGGED: "CHANGE_LOGGED",
 };
 
 /* Reducer */
@@ -23,6 +24,11 @@ export default (state = initState, action) => {
 				data: action.payload
 			};
 
+		case UserActionTypes.CHANGE_LOGGED:
+			return {
+				...state,
+				logged: action.payload
+			}
 		/* DEFAULT */
 		default:
 			return state;
@@ -41,5 +47,11 @@ export const UserActions = {
 			} catch (err) {
 				console.error("Ошибка атворизации.", err.message);
 			}
+		},
+	changeLogged: (value) => {
+		return {
+			type: UserActionTypes.CHANGE_LOGGED,
+			payload: value
 		}
+	}
 };
