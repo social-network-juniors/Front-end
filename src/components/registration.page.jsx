@@ -145,15 +145,20 @@ function Registration(props) {
         const bday = Number(dateInput.split('/')[0]);
         const bmonth = Number(dateInput.split('/')[1]);
         const byear = Number(dateInput.split('/')[2]);
-        console.log(isdataEntered)
         if (isdataEntered) {
             registration(inputData.login, inputData.password, inputData.passwordConfirmation, inputData.name, inputData.lastName, bday, bmonth, byear)
-                .then(function (response) {
-                    console.log(response);
+                .then((response) => {
+                    console.log(response)
+
                 })
                 .catch((error) => {
-                    console.log(error.message);
+                    let mess = error.response.data.errors.login[0];
+                    if (mess == 'The login has already been taken.') {
+                        alert('Такой логин уже зарегистрирован');
+                        console.log(mess)
+                    }
                 });
+
         } else { console.log('enter all the data') }
     }
 

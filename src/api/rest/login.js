@@ -1,3 +1,3 @@
 import makeRequest from "../index";
 
-export const login = (login, password) => makeRequest("auth/register", "POST", { login, password }, null);
+export const login = (login, password) => makeRequest("auth/login", "POST", { login, password }, null);
