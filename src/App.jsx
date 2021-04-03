@@ -41,10 +41,11 @@ function App() {
 							<p>Chat</p>
 						</Route>
 						<Route path="/friends">
-							{
+							{/* {
 								logged ?
 									<Friends /> : <Redirect to="/login" />
-							}
+							} */}
+							<Friends />
 						</Route>
 						<Route path="/">
 							{

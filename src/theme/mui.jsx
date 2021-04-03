@@ -1,5 +1,5 @@
-import {createElement} from "react";
-import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
+import { createElement } from "react";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 
 export const theme = createMuiTheme({
 	palette: {
@@ -9,16 +9,16 @@ export const theme = createMuiTheme({
 	}
 });
 
-theme.breakpoints = {
-	values: {
-		xs: 0,
-		sm: 576,
-		md: 768,
-		lg: 992,
-		xl: 1200,
-		xxl: 1400
-	}
-};
+// theme.breakpoints = {
+// 	values: {
+// 		xs: 0,
+// 		sm: 576,
+// 		md: 768,
+// 		lg: 992,
+// 		xl: 1200,
+// 		xxl: 1400
+// 	}
+// };
 
 
 theme.typography.button = {
@@ -37,7 +37,7 @@ theme.typography.h1 = {
 	color: "#272835"
 };
 
-const ThemeProvider = ({children}) =>
+const ThemeProvider = ({ children }) =>
 	<MuiThemeProvider theme={theme}>
 		{children}
 	</MuiThemeProvider>

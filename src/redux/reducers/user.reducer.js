@@ -45,7 +45,7 @@ export const UserActions = {
 				const resp = await login(login, password);
 				console.log(resp.data);
 			} catch (err) {
-				console.error("Ошибка атворизации.", err.message);
+				console.error("Ошибка авторизации.", err.message);
 			}
 		},
 	changeLogged: (value) => {

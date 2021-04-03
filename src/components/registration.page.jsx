@@ -150,7 +150,12 @@ function Registration(props) {
                 .then((response) => {
 
                     let token = response.data.token;
-                    setCookie('AuthToken', token);
+                    setCookie('AuthToken', token, { 'max-age': 360000 });
+                    let name = "my name";
+                    let value = "John Smith"
+
+
+
                     logIn()
                     // response.data.token
                     // if success =>

@@ -1,8 +1,6 @@
 import apiCall from '../apiCall'
 import makeRequest from "../index";
 
-
-
 export const registration = (
     email,
     password,
@@ -28,11 +26,6 @@ export const registration = (
             "byear": byear
         }
     })
-    // .then(res => {
-    //     console.log(res);
-    // });
-
-
 }
 // import makeRequest from "../index";
 

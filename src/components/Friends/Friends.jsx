@@ -12,16 +12,17 @@ export default function FriendItem(props) {
         (friend) =>
             <div>
                 <img src={friend.avatar} />
-                <div>{friend.name + ' ' + friend.lastName}</div>
+                <div>{friend.first_name + ' ' + friend.second_name}</div>
                 <Link to={`/profile/${friend.id}`}><Button color="secondary">Просмотреть профиль</Button></Link>
                 <Link to={`/chat/${friend.id}`}><Button><ChatBubbleOutlineIcon /></Button></Link>
             </div>
     )
     let searchGlobal =
         <div>
-            <div>У вас нет такого друга, глобальный поиск: </div>
+            <div>Друзья не найдены, глобальный поиск: </div>
             <SearchIcon />
         </div>;
+
     return (
         <div>
             {data.length === 0 && searchGlobal || friends}
