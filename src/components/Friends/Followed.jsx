@@ -14,6 +14,6 @@ export default function FollowedList(props) {
 
     return (
 
-        followedData.length ? followed : <div>У вас пока нет заявок</div>
+        followedData.length ? followed : <div>Вы ещё ни на кого не подписались</div>
     )
 }

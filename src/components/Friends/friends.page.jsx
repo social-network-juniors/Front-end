@@ -114,11 +114,11 @@ export default function Friends() {
                 }}
             />
             <Tabs value={tab} onChange={handleTabsMenu}>
-                <Tab icon={<PeopleIcon />} label="Друзья" />
-                <Tab icon={<PersonAddIcon />} label="Подписчики" />
-                <Tab icon={<StarIcon />} label="Подписки" />
+                <Tab icon={<PeopleIcon />} label={'Друзья (' + friends.length + ')'} />
+                <Tab icon={<PersonAddIcon />} label={'Подписчики (' + followersList.length + ')'} />
+                <Tab icon={<StarIcon />} label={'Подписки (' + followedList.length + ')'} />
             </Tabs>
-            { tab === 0 && <div>
+            { tab === 0 && search === '' && <div>
                 <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleFilter}><SortIcon /></Button>
                 <Menu
                     keepMounted
