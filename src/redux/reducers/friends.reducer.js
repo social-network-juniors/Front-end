@@ -1,4 +1,4 @@
-import { getFriends, getFollowers, getFollowed, findUsers } from '../../api/rest/friends'
+import { getFriends, getFollowers, getFollowed, findUsers, addToFriends } from '../../api/rest/friends'
 
 export const UserActionTypes = {
     LOADING_STARTED: "LOADING_STARTED",
@@ -11,12 +11,16 @@ export const UserActionTypes = {
     SET_FOLLOWERS: "GET_FOLLOWERS",
     SET_FOLLOWED: "GET_FOLLOWED",
     SET_FOUND: "SET_FOUND_USERS",
+    PROCESS_STARTED: "PROCESS_STARTED",
+    PROCESS_FINISHED: "PROCESS_FINISHED",
+
 };
 
 /* Reducer */
 
 const initState = {
     isLoading: false,
+    isInProcess: false,
     friends: [],
     followers: [],
     followed: [],
@@ -56,6 +60,16 @@ export default (state = initState, action) => {
             return {
                 ...state,
                 foundUsers: action.payload
+            }
+        case UserActionTypes.PROCESS_STARTED:
+            return {
+                ...state,
+                isInProcess: true
+            }
+        case UserActionTypes.PROCESS_FINISHED:
+            return {
+                ...state,
+                isInProcess: false
             }
 
         /* DEFAULT */
@@ -100,6 +114,16 @@ export const UserActions = {
         return {
             type: UserActionTypes.SET_FOUND,
             payload: users,
+        }
+    },
+    startProcess: () => {
+        return {
+            type: UserActionTypes.PROCESS_STARTED,
+        }
+    },
+    finishProcess: () => {
+        return {
+            type: UserActionTypes.PROCESS_FINISHED,
         }
     },
 
@@ -151,14 +175,26 @@ export const thunksCreators = {
                 (res) => {
                     dispatch(UserActions.loadOff())
                     dispatch(UserActions.setFound(res.data.result))
-                    console.log(res.data.result)
                 }
             )
 
         }
     },
+    addToFriends: (user_token, id) => {
+        return (dispatch) => {
+            dispatch(UserActions.loadOn())
+            dispatch(UserActions.startProcess())
+            addToFriends(user_token, id).then(
+                (res) => {
+                    dispatch(UserActions.loadOff())
+                    dispatch(UserActions.finishProcess())
+                    console.log(res)
+                }
+            )
+        }
+    }
     // removeFromFriends:
-    //     addToFriends:
+
     //     acceptFriend
     // rejectInvite:
 

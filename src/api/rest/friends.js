@@ -1,4 +1,5 @@
 import apiCall from '../apiCall'
+import makeRequest from "../index";
 
 export const getFriends = (header) => {
 
@@ -41,3 +42,13 @@ export const findUsers = (header, name) => {
         headers: header
     })
 }
+export const addToFriends = (header, user_id) => {
+
+    return apiCall({
+        url: 'https://electroquest.ru/api/friend/add',
+        method: 'post',
+        data: { 'user_id': user_id },
+        headers: header
+    })
+}
+
