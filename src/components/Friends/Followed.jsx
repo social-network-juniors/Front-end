@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { thunksCreators } from "../../redux/reducers/friends.reducer";
 
 import { getAuthorizationHeader } from '../../services'
@@ -15,10 +15,12 @@ export default function FollowedList(props) {
         </div>
     )
     const dispatch = useDispatch();
+    const isInProcess = useSelector(store => store.friends.isInProcess);
 
     let tokenHeader = getAuthorizationHeader();
 
     const unfollow = (id) => {
+        if (isInProcess) return;
         dispatch(thunksCreators.unfollowUser(tokenHeader, id))
         dispatch(thunksCreators.getFollowed(tokenHeader))
 

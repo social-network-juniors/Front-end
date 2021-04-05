@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { thunksCreators } from "../../redux/reducers/friends.reducer";
 
 import { getAuthorizationHeader } from '../../services'
@@ -16,13 +16,14 @@ export default function FriendsList(props) {
     console.log(data)
 
     const dispatch = useDispatch();
-
+    const isInProcess = useSelector(store => store.friends.isInProcess);
     let tokenHeader = getAuthorizationHeader();
 
     const addFriend = (id) => {
         dispatch(thunksCreators.addToFriends(tokenHeader, id))
     }
     const follow = (id) => {
+        if (isInProcess) return;
         dispatch(thunksCreators.followUser(tokenHeader, id))
         dispatch(thunksCreators.getFollowed(tokenHeader))
 
