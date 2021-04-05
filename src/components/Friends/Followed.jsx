@@ -1,17 +1,28 @@
 import React from 'react'
-import DoneIcon from '@material-ui/icons/Done';
-import CloseIcon from '@material-ui/icons/Close';
+
+import { useDispatch } from "react-redux";
+import { thunksCreators } from "../../redux/reducers/friends.reducer";
+
+import { getAuthorizationHeader } from '../../services'
+
 export default function FollowedList(props) {
     const followedData = props.followed;
     const followed = followedData.map((followed) =>
         <div>
             <img src={followed.avatar} />
-            <div>{followed.first_name + ' ' + followed.second_name}</div>
-            <DoneIcon />
-            <CloseIcon />
+            <div>{followed.full_name}</div>
+            <div onClick={() => unfollow(followed.id)}>Отписаться</div>
         </div>
     )
+    const dispatch = useDispatch();
 
+    let tokenHeader = getAuthorizationHeader();
+
+    const unfollow = (id) => {
+        dispatch(thunksCreators.unfollowUser(tokenHeader, id))
+        dispatch(thunksCreators.getFollowed(tokenHeader))
+
+    }
     return (
 
         followedData.length ? followed : <div>Вы ещё ни на кого не подписались</div>

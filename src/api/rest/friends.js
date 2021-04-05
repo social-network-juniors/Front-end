@@ -51,4 +51,23 @@ export const addToFriends = (header, user_id) => {
         headers: header
     })
 }
+export const followUser = (header, user_id) => {
+
+    return apiCall({
+        url: 'https://electroquest.ru/api/followers/follow',
+        method: 'post',
+        data: { 'user_id': user_id },
+        headers: header
+    })
+}
+
+export const unfollowUser = (header, user_id) => {
+
+    return apiCall({
+        url: 'https://electroquest.ru/api/followers/unfollow',
+        method: 'post',
+        data: { 'user_id': user_id },
+        headers: header
+    })
+}
 

@@ -1,4 +1,4 @@
-import { getFriends, getFollowers, getFollowed, findUsers, addToFriends } from '../../api/rest/friends'
+import * as api from '../../api/rest/friends'
 
 export const UserActionTypes = {
     LOADING_STARTED: "LOADING_STARTED",
@@ -135,7 +135,7 @@ export const thunksCreators = {
     getFriends: (user_token) => {
         return (dispatch) => {
             dispatch(UserActions.loadOn())
-            getFriends(user_token).then(
+            api.getFriends(user_token).then(
                 (res) => {
                     dispatch(UserActions.loadOff())
                     dispatch(UserActions.setFriends(res.data.result))
@@ -147,7 +147,7 @@ export const thunksCreators = {
     getFollowers: (user_token) => {
         return (dispatch) => {
             dispatch(UserActions.loadOn())
-            getFollowers(user_token).then(
+            api.getFollowers(user_token).then(
                 (res) => {
                     dispatch(UserActions.loadOff())
                     dispatch(UserActions.setFollowers(res.data.result))
@@ -159,7 +159,7 @@ export const thunksCreators = {
     getFollowed: (user_token) => {
         return (dispatch) => {
             dispatch(UserActions.loadOn())
-            getFollowed(user_token).then(
+            api.getFollowed(user_token).then(
                 (res) => {
                     dispatch(UserActions.loadOff())
                     dispatch(UserActions.setFollowed(res.data.result))
@@ -171,7 +171,7 @@ export const thunksCreators = {
     searchPeople: (user_token, name) => {
         return (dispatch) => {
             dispatch(UserActions.loadOn())
-            findUsers(user_token, name).then(
+            api.findUsers(user_token, name).then(
                 (res) => {
                     dispatch(UserActions.loadOff())
                     dispatch(UserActions.setFound(res.data.result))
@@ -184,7 +184,33 @@ export const thunksCreators = {
         return (dispatch) => {
             dispatch(UserActions.loadOn())
             dispatch(UserActions.startProcess())
-            addToFriends(user_token, id).then(
+            api.addToFriends(user_token, id).then(
+                (res) => {
+                    dispatch(UserActions.loadOff())
+                    dispatch(UserActions.finishProcess())
+                    console.log(res)
+                }
+            )
+        }
+    },
+    followUser: (user_token, id) => {
+        return (dispatch) => {
+            dispatch(UserActions.loadOn())
+            dispatch(UserActions.startProcess())
+            api.followUser(user_token, id).then(
+                (res) => {
+                    dispatch(UserActions.loadOff())
+                    dispatch(UserActions.finishProcess())
+                    console.log(res)
+                }
+            )
+        }
+    },
+    unfollowUser: (user_token, id) => {
+        return (dispatch) => {
+            dispatch(UserActions.loadOn())
+            dispatch(UserActions.startProcess())
+            api.unfollowUser(user_token, id).then(
                 (res) => {
                     dispatch(UserActions.loadOff())
                     dispatch(UserActions.finishProcess())

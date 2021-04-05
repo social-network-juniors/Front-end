@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import AddAlertIcon from '@material-ui/icons/AddAlert';
 import AddIcon from '@material-ui/icons/Add';
 import React from 'react'
 import { Link } from 'react-router-dom';
@@ -19,8 +20,11 @@ export default function FriendsList(props) {
     let tokenHeader = getAuthorizationHeader();
 
     const addFriend = (id) => {
-        console.log(tokenHeader, id)
         dispatch(thunksCreators.addToFriends(tokenHeader, id))
+    }
+    const follow = (id) => {
+        dispatch(thunksCreators.followUser(tokenHeader, id))
+        dispatch(thunksCreators.getFollowed(tokenHeader))
 
     }
     let users = data.map(
@@ -31,6 +35,7 @@ export default function FriendsList(props) {
                 <Link to={`/profile/${user.id}`}><Button color="secondary">Просмотреть профиль</Button></Link>
                 <Link to={`/chat/${user.id}`}><Button><ChatBubbleOutlineIcon /></Button></Link>
                 <AddIcon onClick={() => addFriend(user.id)} />
+                <AddAlertIcon onClick={() => follow(user.id)} />
             </div>
     )
     let searchGlobal =

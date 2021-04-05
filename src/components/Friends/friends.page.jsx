@@ -30,7 +30,7 @@ export default function Friends() {
     const followersList = useSelector(store => store.friends.followers);
     const followedList = useSelector(store => store.friends.followed);
     const foundUsersList = useSelector(store => store.friends.foundUsers);
-
+    console.log(followedList)
     const dispatch = useDispatch();
     let tokenHeader = getAuthorizationHeader();
 
