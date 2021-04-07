@@ -19,3 +19,4 @@ export default makeRequest;
 export * from "./rest/login";
 export * from "./rest/registration";
 export * from "./rest/friends";
+export * from "./rest/profile";

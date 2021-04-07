@@ -1,16 +1,21 @@
-import { login } from "../../api";
+import * as api from '../../api'
+
 
 /* Types */
 
 export const UserActionTypes = {
 	LOGIN: "USER_LOGIN",
+	SET_PROFILE: "SET_PROFILE",
 	CHANGE_LOGGED: "CHANGE_LOGGED",
+	LOADING_STARTED: "LOADING_STARTED",
+	LOADING_FINISHED: "LOADING_FINISHED",
 };
 
 /* Reducer */
 
 const initState = {
-	data: false,
+	isLoading: false,
+	data: [],
 	logged: false
 };
 
@@ -18,16 +23,26 @@ export default (state = initState, action) => {
 	switch (action.type) {
 
 		/* LOGIN */
-		case UserActionTypes.LOGIN:
+		case UserActionTypes.SET_PROFILE:
 			return {
 				...state,
 				data: action.payload
-			};
-
+			}
 		case UserActionTypes.CHANGE_LOGGED:
 			return {
 				...state,
 				logged: action.payload
+			}
+		/* LOADING */
+		case UserActionTypes.LOADING_STARTED:
+			return {
+				...state,
+				isLoading: true
+			}
+		case UserActionTypes.LOADING_FINISHED:
+			return {
+				...state,
+				isLoading: false
 			}
 		/* DEFAULT */
 		default:
@@ -39,6 +54,16 @@ export default (state = initState, action) => {
 /* Action creator */
 
 export const UserActions = {
+	loadOn: () => {
+		return {
+			type: UserActionTypes.LOADING_STARTED,
+		}
+	},
+	loadOff: () => {
+		return {
+			type: UserActionTypes.LOADING_FINISHED,
+		}
+	},
 	login: (login, password) =>
 		async () => {
 			try {
@@ -48,6 +73,12 @@ export const UserActions = {
 				console.error("Ошибка авторизации.", err.message);
 			}
 		},
+	setProfile: (data) => {
+		return {
+			type: UserActionTypes.SET_PROFILE,
+			payload: data
+		}
+	},
 	changeLogged: (value) => {
 		return {
 			type: UserActionTypes.CHANGE_LOGGED,
@@ -55,3 +86,20 @@ export const UserActions = {
 		}
 	}
 };
+
+// Thunk Creators
+export const thunksCreators = {
+	getProfile: (user_token) => {
+		return (dispatch) => {
+			dispatch(UserActions.loadOn())
+			api.getProfile(user_token).then(
+				(res) => {
+					dispatch(UserActions.loadOff())
+					dispatch(UserActions.setProfile(res.data.result))
+					console.log(res);
+				}
+			)
+
+		}
+	},
+}

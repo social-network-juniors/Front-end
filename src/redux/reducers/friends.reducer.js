@@ -1,4 +1,4 @@
-import * as api from '../../api/rest/friends'
+import * as api from '../../api'
 
 export const UserActionTypes = {
     LOADING_STARTED: "LOADING_STARTED",

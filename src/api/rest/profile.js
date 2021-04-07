@@ -1,4 +1,6 @@
 import makeRequest from "../index";
-import {getAuthorizationHeader} from "../../services";
 
-export const requestProfile = makeRequest("profile", "POST", null, null, getAuthorizationHeader());
+export const getProfile = (header) => {
+    return makeRequest("profile", "POST", null, null, header);
+}
+
