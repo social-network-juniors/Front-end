@@ -25,6 +25,7 @@ export default function Friends() {
 
 
     //redux
+    // const store = useSelector(store => store.friends);
     const isLoading = useSelector(store => store.friends.isLoading);
     const friendsList = useSelector(store => store.friends.friends);
     const followersList = useSelector(store => store.friends.followers);
@@ -60,6 +61,10 @@ export default function Friends() {
         getFollowed()
         getRequests()
     }, [])
+    useEffect(() => {
+        setFriends(friendsList)
+
+    }, [friendsList])
 
 
     const [search, setSearch] = useState('');
@@ -75,12 +80,12 @@ export default function Friends() {
     useEffect(() => {
         if (search != '') {
             getFoundUsers(search);
-            setFriends([...friends.filter((e) => e.name.toUpperCase().indexOf(search.toUpperCase(), 0) === 0 ||
-                e.lastName.toUpperCase().indexOf(search.toUpperCase(), 0) === 0
+            setFriends([...friends.filter((e) => e.first_name.toUpperCase().indexOf(search.toUpperCase(), 0) === 0 ||
+                e.last_name.toUpperCase().indexOf(search.toUpperCase(), 0) === 0
             )])
 
 
-        } else { setFriends(friends) }
+        } else { setFriends(friendsList) }
     }, [search])
 
 
@@ -92,11 +97,11 @@ export default function Friends() {
     const closeFilterMenu = (type) => {
         setFilterAnchor(null);
         if (type === 'alphabet') {
-            let newSort = friends.sort(
+            let newSort = friendsList.sort(
                 (a, b) => {
-                    if (a.name > b.name) return 1;
-                    if (a.name == b.name) return 0;
-                    if (a.name < b.name) return -1;
+                    if (a.last_name > b.last_name) return 1;
+                    if (a.last_name == b.last_name) return 0;
+                    if (a.last_name < b.last_name) return -1;
                 }
             );
             setFriends(newSort);
@@ -121,7 +126,7 @@ export default function Friends() {
                 }}
             />
             <Tabs value={tab} onChange={handleTabsMenu}>
-                <Tab icon={<PeopleIcon />} label={'Друзья (' + friendsList.length + ')'} />
+                <Tab icon={<PeopleIcon />} label={'Друзья (' + friends.length + ')'} />
                 <Tab icon={<PersonAddIcon />} label={'Подписчики (' + followersList.length + ')'} />
                 <Tab icon={<StarIcon />} label={'Подписки (' + followedList.length + ')'} />
                 <Tab icon={<PersonAddIcon />} label={'Заявки (' + requestsList.length + ')'} />
@@ -138,7 +143,7 @@ export default function Friends() {
                     <MenuItem onClick={() => closeFilterMenu('default')}>По умолчанию</MenuItem>
                 </Menu>
             </div>}
-            {tab === 0 && <FriendsList friends={friendsList} />}
+            {tab === 0 && <FriendsList friends={friends} />}
             {tab === 0 && search !== '' && <FoundUsersList users={foundUsersList} />}
             {tab === 1 && <FollowersList followers={followersList} />}
             {tab === 2 && <FollowedList followed={followedList} />}
