@@ -10,6 +10,7 @@ import SidemenuCollapse from "./SidemenuCollapse";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import GroupWorkIcon from '@material-ui/icons/GroupWork';
 
 import LineStyleIcon from '@material-ui/icons/LineStyle';
 
@@ -50,6 +51,7 @@ const Sidemenu = () => {
 				{MenuItem("/profile", "Профиль", <AccountBoxIcon />)}
 				{MenuItem("/chat", "Чаты", <QuestionAnswerIcon />)}
 				{MenuItem("/friends", "Друзья", <PeopleAltIcon />)}
+				{MenuItem("/groups", "Группы", <GroupWorkIcon />)}
 				{
 					MenuCollapse(false, "Разное", "Вложенный раздел", <LineStyleIcon />, [
 						MenuItem("/login", "Login", <LineStyleIcon />),

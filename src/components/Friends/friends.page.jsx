@@ -25,7 +25,6 @@ export default function Friends() {
 
 
     //redux
-    const store = useSelector(store => store.friends);
     const isLoading = useSelector(store => store.friends.isLoading);
     const friendsList = useSelector(store => store.friends.friends);
     const followersList = useSelector(store => store.friends.followers);

@@ -1,5 +1,4 @@
 import { Button } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 
 import React from 'react'

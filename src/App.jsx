@@ -2,7 +2,6 @@ import React from "react";
 
 import "./styles.scss";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { connect, useSelector } from "react-redux";
 
 import { useLogged } from "./services/UserService";
 import Login from "./components/login.page";
@@ -10,9 +9,10 @@ import Profile from "./components/profile.page";
 import Registration from "./components/registration.page";
 import Friends from "./components/Friends/friends.page";
 import Chat from "./components/Chat/chat.page";
+import Groups from "./components/Groups/groups.page";
+
 
 import Sidemenu from "./components/Sidemenu/index";
-import Loader from "./components/Loader";
 
 
 function App() {
@@ -47,6 +47,9 @@ function App() {
 									<Friends /> : <Redirect to="/login" />
 							} */}
 							<Friends />
+						</Route>
+						<Route path="/groups">
+							<Groups />
 						</Route>
 						<Route path="/">
 							{
