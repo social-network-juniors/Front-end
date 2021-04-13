@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 import React from 'react'
 import { Link } from 'react-router-dom';
@@ -14,6 +15,7 @@ export default function FriendsList(props) {
                 <div>{friend.full_name}</div>
                 <Link to={`/profile/${friend.id}`}><Button color="secondary">Просмотреть профиль</Button></Link>
                 <Link to={`/chat/${friend.id}`}><Button><ChatBubbleOutlineIcon /></Button></Link>
+                {friend.network_status === 'online' ? <FiberManualRecordIcon /> : null}
             </div>
     )
     let searchGlobal =

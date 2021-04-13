@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./styles.scss";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect, useParams } from "react-router-dom";
 
 import { useLogged } from "./services/UserService";
 import Login from "./components/login.page";
@@ -13,9 +13,12 @@ import Groups from "./components/Groups/groups.page";
 
 
 import Sidemenu from "./components/Sidemenu/index";
+import GroupPage from "./components/Groups/GroupPage";
 
 
 function App() {
+
+
 	const logged = useLogged();
 	return (
 		<div className="app">
@@ -48,6 +51,9 @@ function App() {
 							} */}
 							<Friends />
 						</Route>
+						<Route path="/groups/:id" component={GroupPage}>
+
+						</Route>
 						<Route path="/groups">
 							<Groups />
 						</Route>
@@ -64,5 +70,4 @@ function App() {
 		</div>
 	);
 }
-
 export default App;

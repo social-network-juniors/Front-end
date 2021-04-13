@@ -31,8 +31,6 @@ export default function Friends() {
     const followedList = useSelector(store => store.friends.followed);
     const foundUsersList = useSelector(store => store.friends.foundUsers);
     const requestsList = useSelector(store => store.friends.requests);
-    console.log(friendsList)
-    console.log(followersList)
 
     const dispatch = useDispatch();
     let tokenHeader = getAuthorizationHeader();
@@ -59,6 +57,9 @@ export default function Friends() {
         getFollowers()
         getFollowed()
         getRequests()
+        setInterval(() => {
+            getFriends()
+        }, 30000);
     }, [])
     useEffect(() => {
         setFriends(friendsList)
@@ -74,8 +75,8 @@ export default function Friends() {
     useEffect(() => {
         if (search != '') {
             getFoundUsers(search);
-            setFriends([...friends.filter((e) => e.first_name.toUpperCase().indexOf(search.toUpperCase(), 0) === 0 ||
-                e.last_name.toUpperCase().indexOf(search.toUpperCase(), 0) === 0
+            setFriends([...friends.filter((e) => e.full_name.toUpperCase().indexOf(search.toUpperCase(), 0) === 0 ||
+                e.full_name.toUpperCase().indexOf(search.toUpperCase(), 0) === 0
             )])
         } else { setFriends(friendsList) }
     }, [search])

@@ -1,7 +1,8 @@
 import { Button } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import AddAlertIcon from '@material-ui/icons/AddAlert';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+
 import AddIcon from '@material-ui/icons/Add';
 import React from 'react'
 import { Link } from 'react-router-dom';
@@ -33,11 +34,13 @@ export default function FriendsList(props) {
         (user) =>
             <div>
                 <img src={user.avatar} />
-                <div>{user.first_name + ' ' + user.last_name}</div>
+                <div>{user.full_name}</div>
                 <Link to={`/profile/${user.id}`}><Button color="secondary">Просмотреть профиль</Button></Link>
                 <Link to={`/chat/${user.id}`}><Button><ChatBubbleOutlineIcon /></Button></Link>
-                <AddIcon onClick={() => addFriend(user.id)} />
-                <AddAlertIcon onClick={() => follow(user.id)} />
+                {user.network_status === 'online' ? <FiberManualRecordIcon /> : null}
+
+                <div onClick={() => addFriend(user.id)}>Добавить в друзья</div>
+                <NotificationsIcon onClick={() => follow(user.id)} />
             </div>
     )
     let searchGlobal =
